@@ -1,15 +1,46 @@
-# TikTok Trend Tracker
-
 <div align="center">
-  <h1>🚀 Real-time TikTok Trend Analytics Platform</h1>
-  <p>Monitor viral content patterns, trending sounds, and emerging hashtags in real-time</p>
-  
-  ![Next.js](https://img.shields.io/badge/Next.js-14.0-black?style=flat-square&logo=next.js)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?style=flat-square&logo=typescript)
-  ![Prisma](https://img.shields.io/badge/Prisma-5.7-2D3748?style=flat-square&logo=prisma)
-  ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-TimescaleDB-336791?style=flat-square&logo=postgresql)
-  ![Redis](https://img.shields.io/badge/Redis-7.0-DC382D?style=flat-square&logo=redis)
+
+# 🚀 TikTok Trend Tracker
+
+### Real-time TikTok Analytics & Trend Discovery Platform
+
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge)](https://tiktoktrendtracker.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js-14.0-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
+
+**Monitor viral content patterns, trending sounds, and emerging hashtags with AI-powered predictions**
+
+[Live Demo](https://tiktoktrendtracker.vercel.app) • [Documentation](#-documentation) • [Report Bug](https://github.com/Ananta2545/tiktok-trend-tracker/issues) • [Request Feature](https://github.com/Ananta2545/tiktok-trend-tracker/issues)
+
 </div>
+
+---
+
+## 📸 Screenshots
+
+### Dashboard Overview
+<!-- ![Dashboard Screenshot](docs/images/dashboard.png) -->
+> *Real-time trend analytics dashboard with interactive visualizations*
+
+### Trend Charts & Analytics
+<!-- ![Trend Charts](docs/images/charts.png) -->
+> *D3.js powered interactive charts showing trend growth and velocity*
+
+### API Rate Limit Dashboard
+<!-- ![API Dashboard](docs/images/api-dashboard.png) -->
+> *Monitor your API usage with real-time metrics*
+
+### Alert Management
+<!-- ![Alerts](docs/images/alerts.png) -->
+> *Custom trend alerts with email and webhook notifications*
+
+---
+
+## 🎥 Demo Video
+
+<!-- [![Demo Video](docs/images/video-thumbnail.png)](https://youtu.be/your-video-id) -->
+> *Click to watch the full demo video*
 
 ---
 
@@ -17,81 +48,167 @@
 
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
-- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
 - [Configuration](#-configuration)
 - [API Documentation](#-api-documentation)
 - [Deployment](#-deployment)
-- [Testing](#-testing)
+- [Scripts](#-available-scripts)
 - [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
 ## ✨ Features
 
-### Core Features ✅
+### 🔐 Authentication & User Management
+- OAuth social login (Google, GitHub)
+- Secure session management with NextAuth.js
+- User preference customization
+- Per-user API rate limiting
+- Profile management
 
-#### 🔐 Authentication & User Management
-- **OAuth Social Login**: Google and GitHub integration
-- **User Preferences**: Customizable notification settings
-- **API Rate Limit Dashboard**: Monitor API usage and quotas
-- **Secure Sessions**: JWT-based authentication with NextAuth
+### 🔍 Trend Discovery Engine
+- **Real-time Trending Hashtags** - Track viral hashtags with view counts and growth rates
+- **Viral Sound Detection** - Monitor trending audio clips and music
+- **Creator Growth Tracking** - Follow influencer metrics and engagement
+- **Trend Velocity Analysis** - Measure how fast trends are spreading
+- **Historical Data** - 9+ days of real TikTok trend data
 
-#### 🔍 Trend Discovery Engine
-- **Real-time Trending Hashtags**: RapidAPI TikTok integration
-- **Viral Video Detection**: Advanced algorithm with trend scoring
-- **Sound/Music Trend Tracking**: Monitor viral audio clips
-- **Creator Growth Monitoring**: Track influencer metrics
+### 📊 Data Visualization & Analytics
+- **Interactive D3.js Charts** - Multi-series line charts with hover tooltips
+- **Trend Lifecycle Graphs** - Visualize trends from emergence to decline
+- **Engagement Predictions** - AI-powered forecasting
+- **Performance Metrics** - Response time, success rate, endpoint analysis
+- **Real-time Updates** - Live data refresh every 5 seconds
 
-#### 📊 Data Visualization
-- **Live Trend Charts**: D3.js interactive visualizations
-- **Geographic Heat Maps**: Regional trend analysis
-- **Trend Lifecycle Visualization**: Track trends from emergence to decline
-- **Engagement Prediction Graphs**: AI-powered trend forecasting
+### 🔔 Smart Alert System
+- Custom threshold-based alerts
+- Multi-channel notifications (Email, Webhook)
+- Daily trend digest emails
+- Configurable alert triggers
+- Alert history and tracking
 
-#### 🔔 Alert System
-- **Custom Trend Alerts**: Set thresholds for hashtags, sounds, creators
-- **Email/Webhook Notifications**: Real-time alerts via multiple channels
-- **Threshold-based Triggers**: Automated monitoring
-- **Daily Trend Digests**: Scheduled email summaries
-
-### Bonus Features 🎁
-
-- **AI-powered Trend Predictions**: Machine learning trend forecasting
-- **Content Idea Generator**: Suggest content based on trends
-- **Competitor Tracking**: Monitor specific creators
-- **Trend Participation Tracker**: Track your content performance
+### 🤖 AI-Powered Features
+- **Trend Predictions** - Forecast trend growth trajectory
+- **Content Ideas Generator** - Get suggestions based on trending topics
+- **Competitor Analysis** - Track and compare creator performance
+- **Lifecycle Prediction** - Identify trend stages (Emerging, Peak, Declining)
 
 ---
 
 ## 🛠 Tech Stack
 
+<table>
+<tr>
+<td valign="top" width="33%">
+
 ### Frontend
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Visualization**: D3.js, Recharts
-- **State Management**: Zustand, React Query
-- **Animation**: Framer Motion
-- **UI Components**: Custom components with Lucide icons
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first styling
+- **D3.js** - Interactive data visualizations
+- **Chart.js** - Responsive charts
+- **TanStack Query** - Data fetching & caching
+- **Framer Motion** - Smooth animations
+- **Lucide Icons** - Beautiful icons
+
+</td>
+<td valign="top" width="33%">
 
 ### Backend
-- **Runtime**: Node.js 20
-- **API**: Next.js API Routes
-- **Real-time**: Socket.io (WebSocket)
-- **Authentication**: NextAuth.js
-- **API Integration**: Axios + RapidAPI
+- **Node.js** - JavaScript runtime
+- **Next.js API Routes** - RESTful API
+- **NextAuth.js** - Authentication
+- **Prisma ORM** - Database toolkit
+- **Socket.io** - WebSocket real-time
+- **Bull** - Background job queue
+- **Nodemailer** - Email service
+- **Axios** - HTTP client
 
-### Database & Cache
-- **Database**: PostgreSQL with TimescaleDB (time-series optimization)
-- **ORM**: Prisma
-- **Cache**: Redis
-- **Queue**: Bull (background jobs)
+</td>
+<td valign="top" width="33%">
 
 ### Infrastructure
-- **Containerization**: Docker & Docker Compose
-- **Email**: Nodemailer
-- **Webhooks**: Custom webhook system
+- **PostgreSQL** - Primary database
+- **TimescaleDB** - Time-series data
+- **Redis** - Caching & sessions
+- **Docker** - Containerization
+- **Vercel** - Hosting & deployment
+- **GitHub Actions** - CI/CD pipeline
+- **RapidAPI** - TikTok data source
+
+</td>
+</tr>
+</table>
+
+---
+
+## 📁 Project Structure
+
+```
+tiktok-trend-tracker/
+├── app/                          # Next.js 14 App Router
+│   ├── api/                      # API Routes
+│   │   ├── auth/                 # Authentication endpoints
+│   │   ├── trends/               # Trend data APIs
+│   │   │   ├── hashtags/
+│   │   │   ├── sounds/
+│   │   │   └── creators/
+│   │   ├── alerts/               # Alert management
+│   │   ├── notifications/        # Notification system
+│   │   ├── charts/               # Chart data endpoints
+│   │   ├── rate-limit/           # Rate limit tracking
+│   │   ├── ai/                   # AI predictions & ideas
+│   │   └── cron/                 # Scheduled jobs
+│   ├── dashboard/                # Main dashboard
+│   ├── rate-limit/               # API usage dashboard
+│   ├── ai-features/              # AI tools page
+│   ├── settings/                 # User settings
+│   ├── notifications/            # Notifications page
+│   └── auth/                     # Auth pages
+│
+├── components/                   # React Components
+│   ├── charts/                   # D3.js & Chart.js components
+│   ├── tables/                   # Data tables
+│   ├── cards/                    # Stat cards
+│   └── providers.tsx             # Context providers
+│
+├── lib/                          # Core Libraries
+│   ├── auth.ts                   # NextAuth configuration
+│   ├── prisma.ts                 # Prisma client
+│   ├── redis.ts                  # Redis client
+│   ├── tiktok-api.ts             # RapidAPI integration
+│   ├── trend-analyzer.ts         # Trend detection algorithms
+│   ├── notification.ts           # Email notifications
+│   ├── webhook.ts                # Webhook system
+│   └── utils.ts                  # Utility functions
+│
+├── prisma/                       # Database Schema
+│   └── schema.prisma             # Prisma schema definition
+│
+├── scripts/                      # Utility Scripts
+│   ├── seed-data.js              # Database seeding
+│   ├── fetch-real-data.js        # Fetch TikTok data
+│   ├── generate-user-api-usage.js # Generate test data
+│   ├── check-submission-readiness.js # Verify project
+│   ├── check-trends.js           # Check trend data
+│   ├── list-users.js             # List users
+│   └── trend-monitor.js          # Background worker
+│
+├── types/                        # TypeScript Types
+│   └── next-auth.d.ts            # NextAuth type extensions
+│
+├── workers/                      # Background Workers
+│   └── trend-processor.js        # Trend processing worker
+│
+├── docker-compose.yml            # Docker orchestration
+├── Dockerfile                    # Container definition
+├── .env.example                  # Environment variables template
+├── next.config.js                # Next.js configuration
+├── tailwind.config.ts            # Tailwind configuration
+└── tsconfig.json                 # TypeScript configuration
+```
 
 ---
 
@@ -127,310 +244,457 @@
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 20+
-- Docker & Docker Compose
-- RapidAPI Account (for TikTok API)
-- OAuth Credentials (Google/GitHub)
+Ensure you have the following installed:
 
-### Installation
+- **Node.js** 20.x or higher
+- **npm** or **yarn**
+- **Docker** & **Docker Compose** (optional, for containerized setup)
+- **PostgreSQL** (or use Docker)
+- **Redis** (or use Docker)
 
-1. **Clone the repository**
+### Quick Setup
+
+#### Option 1: Docker (Recommended)
+
 ```bash
-git clone https://github.com/yourusername/tiktok-trend-tracker.git
+# Clone the repository
+git clone https://github.com/Ananta2545/tiktok-trend-tracker.git
 cd tiktok-trend-tracker
-```
 
-2. **Install dependencies**
-```bash
-npm install
-```
-
-3. **Set up environment variables**
-```bash
+# Copy environment variables
 cp .env.example .env
-```
 
-Edit `.env` with your credentials:
-```env
-# Database
-DATABASE_URL="postgresql://tiktok:tiktok_password@localhost:5432/tiktok_trends"
+# Edit .env with your credentials (see Configuration section)
 
-# Redis
-REDIS_URL="redis://localhost:6379"
-
-# NextAuth
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="generate-with-openssl-rand-base64-32"
-
-# OAuth
-GOOGLE_CLIENT_ID="your-google-client-id"
-GOOGLE_CLIENT_SECRET="your-google-client-secret"
-GITHUB_CLIENT_ID="your-github-client-id"
-GITHUB_CLIENT_SECRET="your-github-client-secret"
-
-# RapidAPI
-RAPIDAPI_KEY="your-rapidapi-key"
-RAPIDAPI_HOST="tiktok-scraper7.p.rapidapi.com"
-
-# Email
-SMTP_HOST="smtp.gmail.com"
-SMTP_PORT="587"
-SMTP_USER="your-email@gmail.com"
-SMTP_PASSWORD="your-app-password"
-```
-
-4. **Start services with Docker**
-```bash
+# Start all services with Docker Compose
 docker-compose up -d
+
+# Access the application
+open http://localhost:3000
 ```
 
-5. **Run database migrations**
+#### Option 2: Local Development
+
 ```bash
+# Clone the repository
+git clone https://github.com/Ananta2545/tiktok-trend-tracker.git
+cd tiktok-trend-tracker
+
+# Install dependencies
+npm install
+
+# Copy environment variables
+cp .env.example .env
+
+# Set up the database
 npx prisma migrate dev
-```
-
-6. **Generate Prisma Client**
-```bash
 npx prisma generate
-```
 
-7. **Start development server**
-```bash
+# Seed initial data (optional)
+npm run seed
+
+# Start development server
 npm run dev
-```
 
-8. **Start background worker** (in another terminal)
-```bash
-npm run worker
+# Access the application
+open http://localhost:3000
 ```
-
-Visit [http://localhost:3000](http://localhost:3000) to see the application!
 
 ---
 
 ## ⚙️ Configuration
 
-### OAuth Setup
+### Environment Variables
 
-#### Google OAuth
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project
-3. Enable Google+ API
-4. Create OAuth 2.0 credentials
-5. Add authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
+Create a `.env` file in the root directory:
 
-#### GitHub OAuth
-1. Go to GitHub Settings > Developer settings > OAuth Apps
-2. Register a new application
-3. Set Authorization callback URL: `http://localhost:3000/api/auth/callback/github`
+```env
+# Database
+DATABASE_URL="postgresql://user:password@localhost:5432/tiktok_trends?schema=public"
 
-### RapidAPI Setup
-1. Sign up at [RapidAPI](https://rapidapi.com/)
+# Redis Cache
+REDIS_URL="redis://localhost:6379"
+
+# NextAuth Configuration
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="generate-using-openssl-rand-base64-32"
+
+# OAuth Providers
+GOOGLE_CLIENT_ID="your-google-oauth-client-id"
+GOOGLE_CLIENT_SECRET="your-google-oauth-secret"
+GITHUB_CLIENT_ID="your-github-oauth-client-id"
+GITHUB_CLIENT_SECRET="your-github-oauth-secret"
+
+# RapidAPI (TikTok Data)
+RAPIDAPI_KEY="your-rapidapi-key"
+RAPIDAPI_HOST="tiktok-scraper7.p.rapidapi.com"
+
+# Email Notifications (SMTP)
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT="587"
+SMTP_USER="your-email@gmail.com"
+SMTP_PASSWORD="your-app-specific-password"
+SMTP_FROM="TikTok Trends <noreply@tiktoktrends.com>"
+
+# Webhook (Optional)
+WEBHOOK_SECRET="your-webhook-secret"
+
+# Cron Job Secret
+CRON_SECRET="your-cron-secret-key"
+```
+
+### Setting Up OAuth Providers
+
+<details>
+<summary><b>📱 Google OAuth Setup</b></summary>
+
+1. Visit [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing
+3. Navigate to **APIs & Services > Credentials**
+4. Click **Create Credentials > OAuth 2.0 Client ID**
+5. Configure consent screen if prompted
+6. Add authorized redirect URI:
+   - Development: `http://localhost:3000/api/auth/callback/google`
+   - Production: `https://yourdomain.com/api/auth/callback/google`
+7. Copy **Client ID** and **Client Secret** to `.env`
+
+</details>
+
+<details>
+<summary><b>🐙 GitHub OAuth Setup</b></summary>
+
+1. Go to GitHub Settings > Developer settings > [OAuth Apps](https://github.com/settings/developers)
+2. Click **New OAuth App**
+3. Fill in application details:
+   - Application name: TikTok Trend Tracker
+   - Homepage URL: `http://localhost:3000`
+   - Authorization callback URL: `http://localhost:3000/api/auth/callback/github`
+4. Click **Register application**
+5. Generate a new client secret
+6. Copy **Client ID** and **Client Secret** to `.env`
+
+</details>
+
+<details>
+<summary><b>⚡ RapidAPI Setup</b></summary>
+
+1. Create account at [RapidAPI](https://rapidapi.com/)
 2. Subscribe to [TikTok Scraper API](https://rapidapi.com/yi005/api/tiktok-scraper7/)
-3. Copy your API key to `.env`
+3. Choose a pricing plan (Free tier available)
+4. Copy **X-RapidAPI-Key** from dashboard
+5. Add to `.env` as `RAPIDAPI_KEY`
 
-### Email Setup (Gmail Example)
+</details>
+
+<details>
+<summary><b>📧 Email Configuration (Gmail)</b></summary>
+
+1. Enable 2-Factor Authentication on your Gmail account
+2. Generate an [App Password](https://myaccount.google.com/apppasswords)
+3. Use the 16-character app password in `.env`:
+   ```env
+   SMTP_USER="your-email@gmail.com"
+   SMTP_PASSWORD="your-16-char-app-password"
+   ```
+
+</details>
+
+---
+
+## 📜 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+| `npm run worker` | Start background worker |
+| `npm run seed` | Seed database with sample data |
+| `npm run fetch:real` | Fetch real TikTok data |
+| `npm run monitor` | Run trend monitoring |
+| `npx prisma studio` | Open Prisma database GUI |
+| `npx prisma migrate dev` | Create new migration |
+| `npx prisma db push` | Push schema to database |
+
+---
+
+## 📊 Usage Examples
+
+### Fetching Real-Time Trends
+
+```bash
+# Fetch latest trending hashtags, sounds, and creators
+npm run fetch:real
+
+# Start continuous monitoring
+npm run monitor
 1. Enable 2-factor authentication on Gmail
 2. Generate an App Password
 3. Use the app password in `.env`
+
+### Generate Sample Data
+
+```bash
+# Generate test API usage data for a user
+node scripts/generate-user-api-usage.js your@email.com
+
+# Check trend data coverage
+node scripts/check-trends.js
+
+# Verify submission readiness
+node scripts/check-submission-readiness.js
+```
 
 ---
 
 ## 📚 API Documentation
 
-### REST Endpoints
+<details>
+<summary><b>🔐 Authentication Endpoints</b></summary>
 
-#### Authentication
-- `POST /api/auth/signin` - Sign in
-- `POST /api/auth/signout` - Sign out
-- `GET /api/auth/session` - Get current session
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/auth/session` | Get current user session |
+| `POST` | `/api/auth/signin` | Sign in with OAuth |
+| `POST` | `/api/auth/signout` | Sign out current user |
 
-#### Trends
-- `GET /api/trends/hashtags` - Get trending hashtags
-- `GET /api/trends/sounds` - Get trending sounds
-- `GET /api/trends/creators` - Get trending creators
+</details>
 
-#### Stats
-- `GET /api/stats` - Get dashboard statistics
+<details>
+<summary><b>📈 Trend Data Endpoints</b></summary>
 
-#### Charts
-- `GET /api/charts/[type]` - Get chart data (hashtags/sounds/creators)
+| Method | Endpoint | Description | Response |
+|--------|----------|-------------|----------|
+| `GET` | `/api/trends/hashtags` | Trending hashtags | Array of hashtag trends |
+| `GET` | `/api/trends/sounds` | Trending sounds | Array of sound trends |
+| `GET` | `/api/trends/creators` | Trending creators | Array of creator trends |
+| `GET` | `/api/stats` | Dashboard statistics | Stats summary |
+| `GET` | `/api/charts/[type]` | Chart data | Time-series data |
 
-#### Alerts
-- `GET /api/alerts` - List user alerts
-- `POST /api/alerts` - Create new alert
-- `PUT /api/alerts/[id]` - Update alert
-- `DELETE /api/alerts/[id]` - Delete alert
+</details>
 
-### WebSocket Events
+<details>
+<summary><b>🔔 Alert Management</b></summary>
 
-#### Client → Server
-- `authenticate` - Authenticate user
-- `subscribe:hashtag` - Subscribe to hashtag updates
-- `subscribe:sound` - Subscribe to sound updates
-- `subscribe:creator` - Subscribe to creator updates
+| Method | Endpoint | Description | Body |
+|--------|----------|-------------|------|
+| `GET` | `/api/alerts` | List all user alerts | - |
+| `POST` | `/api/alerts` | Create new alert | Alert config |
+| `PUT` | `/api/alerts/[id]` | Update alert | Updated config |
+| `DELETE` | `/api/alerts/[id]` | Delete alert | - |
+| `POST` | `/api/alerts/[id]/toggle` | Toggle alert | - |
 
-#### Server → Client
-- `trend:update` - Real-time trend update
-- `trend:alert` - Alert notification
-- `system:notification` - System message
+</details>
+
+<details>
+<summary><b>📊 Analytics & Monitoring</b></summary>
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/rate-limit` | API usage statistics |
+| `GET` | `/api/notifications` | User notifications |
+| `GET` | `/api/notifications/count` | Unread count |
+| `POST` | `/api/notifications/mark-all-read` | Mark all as read |
+
+</details>
+
+<details>
+<summary><b>🤖 AI Features</b></summary>
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/ai/predict` | Trend predictions |
+| `POST` | `/api/ai/content-ideas` | Content suggestions |
+| `GET` | `/api/competitor` | Competitor analysis |
+
+</details>
 
 ---
 
-## 🐳 Deployment
+## 🚀 Deployment
 
-### Docker Production Build
+### Deploy to Vercel (Recommended)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Ananta2545/tiktok-trend-tracker)
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+
+# Set environment variables
+vercel env add DATABASE_URL
+vercel env add REDIS_URL
+# ... add all required env vars
+```
+
+### Deploy with Docker
 
 ```bash
 # Build production image
-docker build -t tiktok-trend-tracker .
+docker build -t tiktok-trend-tracker:latest .
 
-# Run with docker-compose
-docker-compose -f docker-compose.prod.yml up -d
+# Run container
+docker run -d \
+  --name tiktok-trends \
+  -p 3000:3000 \
+  --env-file .env.production \
+  tiktok-trend-tracker:latest
+
+# Or use docker-compose
+docker-compose up -d
 ```
 
-### Environment Variables for Production
-
-Ensure all environment variables are properly set in production:
-
-```env
-NODE_ENV=production
-NEXTAUTH_URL=https://your-domain.com
-DATABASE_URL=postgresql://user:pass@prod-db:5432/db
-REDIS_URL=redis://prod-redis:6379
-```
-
-### Database Migrations
+### Database Migration (Production)
 
 ```bash
+# Run migrations
 npx prisma migrate deploy
+
+# Generate Prisma client
+npx prisma generate
 ```
 
 ---
 
-## 🧪 Testing
-
-### Run Tests
-```bash
-npm test
-```
-
-### Test Coverage
-```bash
-npm run test:coverage
-```
-
----
-
-## 📊 Trend Algorithm Explanation
+## 🧪 Trend Detection Algorithm
 
 ### Trend Score Calculation
 
-The trend score (0-100) is calculated using multiple metrics:
+Our proprietary algorithm calculates trend scores (0-100) using multiple weighted factors:
 
+```typescript
+TrendScore = 
+  (ViewCount × 0.4) + 
+  (GrowthRate × 0.3) + 
+  (Velocity × 0.2) + 
+  (EngagementRate × 0.1)
+
+Velocity = ViewGrowth / TimePeriod
+GrowthRate = ((Current - Previous) / Previous) × 100
 ```
-TrendScore = (ViewScore × 0.2) + 
-             (GrowthScore × 0.3) + 
-             (VelocityScore × 0.25) + 
-             (EngagementScore × 0.15) + 
-             (TimeDecayScore × 0.1)
-```
 
-**Components:**
-- **ViewScore**: Normalized view count (log scale)
-- **GrowthScore**: Percentage growth rate
-- **VelocityScore**: Rate of change over time
-- **EngagementScore**: Likes + Comments + Shares / Views
-- **TimeDecayScore**: Recency factor (exponential decay)
+### Trend Lifecycle Stages
 
-### Viral Detection
+| Stage | Criteria | Description |
+|-------|----------|-------------|
+| **Emerging** | Growth > 50%, Age < 2 days | Just starting to gain traction |
+| **Rising** | Growth 20-50%, Age 2-5 days | Rapidly gaining popularity |
+| **Peak** | Growth 10-20%, High views | At maximum popularity |
+| **Declining** | Growth < 10% | Losing momentum |
+| **Mature** | Stable views, Age > 7 days | Established trend |
 
-Videos are classified as viral based on:
-- Views per hour > threshold
-- Engagement rate > 8%
-- Share rate > 2%
-- Rapid growth in first 24 hours
+### Viral Detection Criteria
 
----
+Content is classified as "viral" when:
+- ✅ Growth rate > 100% in 24 hours
+- ✅ Velocity > 50 (high acceleration)
+- ✅ Engagement rate > 8%
+- ✅ View count > threshold (configurable)
 
-## 📁 Project Structure
-
-```
-tiktok-trend-tracker/
-├── app/                    # Next.js app directory
-│   ├── api/               # API routes
-│   ├── auth/              # Authentication pages
-│   ├── dashboard/         # Dashboard pages
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page
-├── components/            # React components
-│   ├── cards/            # Card components
-│   ├── charts/           # D3.js charts
-│   ├── tables/           # Data tables
-│   ├── providers.tsx     # Context providers
-│   └── socket-provider.tsx # WebSocket provider
-├── lib/                   # Utility libraries
-│   ├── auth.ts           # NextAuth config
-│   ├── prisma.ts         # Prisma client
-│   ├── redis.ts          # Redis client
-│   ├── socket.ts         # Socket.io server
-│   ├── tiktok-api.ts     # TikTok API service
-│   ├── trend-analyzer.ts # Trend algorithms
-│   └── notification.ts   # Notification service
-├── prisma/               # Database schema
-│   └── schema.prisma     # Prisma schema
-├── workers/              # Background workers
-│   └── trend-processor.js # Trend processing worker
-├── docker-compose.yml    # Docker composition
-├── Dockerfile           # Docker image config
-├── package.json         # Dependencies
-├── tsconfig.json        # TypeScript config
-└── README.md           # This file
-```
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+We welcome contributions! Please follow these steps:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Commit your changes**
+   ```bash
+   git commit -m 'Add some amazing feature'
+   ```
+4. **Push to the branch**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. **Open a Pull Request**
+
+### Development Guidelines
+
+- Follow the existing code style
+- Write meaningful commit messages
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting PR
 
 ---
 
-## 📝 License
+## 🐛 Known Issues & Limitations
+
+- **Rate Limiting**: RapidAPI has request limits on free tier
+- **WebSocket**: Currently using HTTP polling mode in production
+- **Real-time Updates**: 5-minute delay for trend updates via cron
+- **Data Coverage**: Historical data limited to API subscription plan
+
+---
+
+## 📝 Documentation
+
+For more detailed documentation, see:
+
+- [SETUP.md](SETUP.md) - Detailed setup instructions
+- [SUBMISSION_REPORT.md](SUBMISSION_REPORT.md) - Project submission details
+- [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) - Feature checklist
+
+---
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## 👨‍💻 Author
 
-- **RapidAPI** for TikTok data access
-- **TimescaleDB** for time-series optimization
-- **D3.js** for powerful visualizations
-- **Next.js** team for an amazing framework
+**Anata Chatterjee**
+
+- GitHub: [@Ananta2545](https://github.com/Ananta2545)
+- Email: chatterjeeanata091@gmail.com
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
 
 ---
 
-## 📧 Contact
+## 🙏 Acknowledgments
 
-For questions or support, please open an issue or contact:
-- Email: support@tiktoktrends.app
-- Twitter: [@TikTokTrends](https://twitter.com/tiktoktrends)
+- [RapidAPI](https://rapidapi.com/) for TikTok API access
+- [Vercel](https://vercel.com/) for hosting
+- [Neon](https://neon.tech/) for PostgreSQL database
+- [Next.js](https://nextjs.org/) team for the amazing framework
+- [D3.js](https://d3js.org/) for visualization library
+- TikTok for inspiring the project
+
+---
+
+## 📊 Project Stats
+
+![GitHub stars](https://img.shields.io/github/stars/Ananta2545/tiktok-trend-tracker?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Ananta2545/tiktok-trend-tracker?style=social)
+![GitHub issues](https://img.shields.io/github/issues/Ananta2545/tiktok-trend-tracker)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Ananta2545/tiktok-trend-tracker)
 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by TikTok Trend Tracker Team</p>
-  <p>⭐ Star this repo if you find it helpful!</p>
-</div>
+
+**Made with ❤️ by Anata Chatterjee**
+
+[⭐ Star this repo](https://github.com/Ananta2545/tiktok-trend-tracker) • [🐛 Report Bug](https://github.com/Ananta2545/tiktok-trend-tracker/issues) • [✨ Request Feature](https://github.com/Ananta2545/tiktok-trend-tracker/issues)
+
+</div
+├── tsconfig.json        # TypeScript config
+└── README.md           # This file
+```
+
+
