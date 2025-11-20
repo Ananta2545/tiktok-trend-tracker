@@ -63,7 +63,43 @@ export const authOptions: NextAuthOptions = {
   },
   debug: process.env.NODE_ENV === 'development',
   useSecureCookies: process.env.NODE_ENV === 'production',
+  events: {
+    async linkAccount({ user }) {
+      // Auto-verify email when linking OAuth account
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() }
+      })
+    }
+  },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      // Allow sign in with different OAuth providers for same email
+      if (account?.provider === 'google' || account?.provider === 'github') {
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email! },
+          include: { accounts: true }
+        })
+
+        if (existingUser && !existingUser.accounts.find(acc => acc.provider === account.provider)) {
+          // Link new OAuth provider to existing user
+          await prisma.account.create({
+            data: {
+              userId: existingUser.id,
+              type: account.type,
+              provider: account.provider,
+              providerAccountId: account.providerAccountId,
+              access_token: account.access_token,
+              expires_at: account.expires_at,
+              token_type: account.token_type,
+              scope: account.scope,
+              id_token: account.id_token,
+            }
+          })
+        }
+      }
+      return true
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
