@@ -4,13 +4,7 @@
 
 ### Real-time TikTok Analytics & Trend Discovery Platform
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge)](https://tiktoktrendtracker.vercel.app)
-[![Next.js](https://img.shields.io/badge/Next.js-14.0-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-
 **Monitor viral content patterns, trending sounds, and emerging hashtags with AI-powered predictions**
-
-[Live Demo](https://tiktoktrendtracker.vercel.app) • [Documentation](#-documentation) • [Report Bug](https://github.com/Ananta2545/tiktok-trend-tracker/issues) • [Request Feature](https://github.com/Ananta2545/tiktok-trend-tracker/issues)
 
 </div>
 
@@ -623,23 +617,6 @@ We welcome contributions! Please follow these steps:
 - **WebSocket**: Currently using HTTP polling mode in production
 - **Real-time Updates**: 5-minute delay for trend updates via cron
 - **Data Coverage**: Historical data limited to API subscription plan
-
----
-
-## 📝 Documentation
-
-For more detailed documentation, see:
-
-- [SETUP.md](SETUP.md) - Detailed setup instructions
-- [SUBMISSION_REPORT.md](SUBMISSION_REPORT.md) - Project submission details
-- [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) - Feature checklist
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 ## 👨‍💻 Author
@@ -648,27 +625,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - GitHub: [@Ananta2545](https://github.com/Ananta2545)
 - Email: chatterjeeanata091@gmail.com
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-
----
-
-## 🙏 Acknowledgments
-
-- [RapidAPI](https://rapidapi.com/) for TikTok API access
-- [Vercel](https://vercel.com/) for hosting
-- [Neon](https://neon.tech/) for PostgreSQL database
-- [Next.js](https://nextjs.org/) team for the amazing framework
-- [D3.js](https://d3js.org/) for visualization library
-- TikTok for inspiring the project
-
----
-
-## 📊 Project Stats
-
-![GitHub stars](https://img.shields.io/github/stars/Ananta2545/tiktok-trend-tracker?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Ananta2545/tiktok-trend-tracker?style=social)
-![GitHub issues](https://img.shields.io/github/issues/Ananta2545/tiktok-trend-tracker)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/Ananta2545/tiktok-trend-tracker)
 
 ---
 
