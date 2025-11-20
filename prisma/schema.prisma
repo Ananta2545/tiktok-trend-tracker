@@ -1,0 +1,287 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  accounts      Account[]
+  sessions      Session[]
+  preferences   UserPreference?
+  alerts        TrendAlert[]
+  notifications Notification[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model UserPreference {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  emailNotifications    Boolean  @default(true)
+  webhookNotifications  Boolean  @default(false)
+  webhookUrl            String?
+  dailyDigest           Boolean  @default(true)
+  digestTime            String   @default("09:00")
+  minEngagementRate     Float    @default(5.0)
+  minViewCount          Int      @default(100000)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Hashtag {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  displayName     String
+  videoCount      Int      @default(0)
+  viewCount       BigInt   @default(0)
+  isVerified      Boolean  @default(false)
+  firstSeenAt     DateTime @default(now())
+  lastUpdatedAt   DateTime @updatedAt
+  
+  trends          HashtagTrend[]
+  videos          Video[]
+  alerts          TrendAlert[]
+}
+
+model HashtagTrend {
+  id              String   @id @default(cuid())
+  hashtagId       String
+  timestamp       DateTime @default(now())
+  videoCount      Int
+  viewCount       BigInt
+  likeCount       BigInt
+  shareCount      BigInt
+  commentCount    BigInt
+  growthRate      Float
+  velocity        Float
+  trendScore      Float
+  rank            Int?
+  
+  hashtag Hashtag @relation(fields: [hashtagId], references: [id], onDelete: Cascade)
+  
+  @@index([hashtagId, timestamp])
+  @@index([timestamp])
+  @@index([trendScore])
+}
+
+model Sound {
+  id              String   @id @default(cuid())
+  tiktokId        String   @unique
+  title           String
+  author          String
+  duration        Int
+  playUrl         String?
+  coverUrl        String?
+  videoCount      Int      @default(0)
+  isOriginal      Boolean  @default(false)
+  firstSeenAt     DateTime @default(now())
+  lastUpdatedAt   DateTime @updatedAt
+  
+  trends          SoundTrend[]
+  videos          Video[]
+  alerts          TrendAlert[]
+}
+
+model SoundTrend {
+  id              String   @id @default(cuid())
+  soundId         String
+  timestamp       DateTime @default(now())
+  videoCount      Int
+  viewCount       BigInt
+  growthRate      Float
+  velocity        Float
+  trendScore      Float
+  rank            Int?
+  
+  sound Sound @relation(fields: [soundId], references: [id], onDelete: Cascade)
+  
+  @@index([soundId, timestamp])
+  @@index([timestamp])
+  @@index([trendScore])
+}
+
+model Creator {
+  id              String   @id @default(cuid())
+  tiktokId        String   @unique
+  username        String   @unique
+  nickname        String
+  avatarUrl       String?
+  followerCount   Int      @default(0)
+  followingCount  Int      @default(0)
+  videoCount      Int      @default(0)
+  likeCount       BigInt   @default(0)
+  verified        Boolean  @default(false)
+  bio             String?
+  firstSeenAt     DateTime @default(now())
+  lastUpdatedAt   DateTime @updatedAt
+  
+  trends          CreatorTrend[]
+  videos          Video[]
+  alerts          TrendAlert[]
+}
+
+model CreatorTrend {
+  id              String   @id @default(cuid())
+  creatorId       String
+  timestamp       DateTime @default(now())
+  followerCount   Int
+  videoCount      Int
+  totalViews      BigInt
+  totalLikes      BigInt
+  growthRate      Float
+  engagementRate  Float
+  trendScore      Float
+  
+  creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  
+  @@index([creatorId, timestamp])
+  @@index([timestamp])
+  @@index([trendScore])
+}
+
+model Video {
+  id              String   @id @default(cuid())
+  tiktokId        String   @unique
+  desc            String?
+  createTime      DateTime
+  viewCount       BigInt
+  likeCount       BigInt
+  shareCount      BigInt
+  commentCount    BigInt
+  playCount       BigInt
+  coverUrl        String?
+  videoUrl        String?
+  duration        Int
+  isAd            Boolean  @default(false)
+  creatorId       String
+  soundId         String?
+  region          String?
+  viralScore      Float    @default(0)
+  engagementRate  Float    @default(0)
+  firstSeenAt     DateTime @default(now())
+  lastUpdatedAt   DateTime @updatedAt
+  
+  creator         Creator  @relation(fields: [creatorId], references: [id])
+  sound           Sound?   @relation(fields: [soundId], references: [id])
+  hashtags        Hashtag[]
+  
+  @@index([createTime])
+  @@index([viralScore])
+  @@index([viewCount])
+}
+
+model TrendAlert {
+  id              String   @id @default(cuid())
+  userId          String
+  type            AlertType
+  name            String
+  threshold       Float
+  condition       String
+  isActive        Boolean  @default(true)
+  lastTriggered   DateTime?
+  createdAt       DateTime @default(now())
+  
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hashtagId       String?
+  hashtag         Hashtag? @relation(fields: [hashtagId], references: [id])
+  soundId         String?
+  sound           Sound?   @relation(fields: [soundId], references: [id])
+  creatorId       String?
+  creator         Creator? @relation(fields: [creatorId], references: [id])
+  
+  notifications   Notification[]
+  
+  @@index([userId])
+  @@index([type])
+}
+
+model Notification {
+  id              String   @id @default(cuid())
+  userId          String
+  alertId         String?
+  type            NotificationType
+  title           String
+  message         String
+  data            Json?
+  read            Boolean  @default(false)
+  sentAt          DateTime @default(now())
+  
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  alert           TrendAlert? @relation(fields: [alertId], references: [id])
+  
+  @@index([userId, read])
+  @@index([sentAt])
+}
+
+model ApiUsage {
+  id              String   @id @default(cuid())
+  endpoint        String
+  method          String
+  statusCode      Int
+  responseTime    Int
+  userId          String?
+  timestamp       DateTime @default(now())
+  
+  @@index([userId, timestamp])
+  @@index([endpoint, timestamp])
+}
+
+enum AlertType {
+  HASHTAG
+  SOUND
+  CREATOR
+  KEYWORD
+}
+
+enum NotificationType {
+  TREND_ALERT
+  DAILY_DIGEST
+  SYSTEM
+}
