@@ -112,7 +112,7 @@ export default function TrendChart({ data, type }: TrendChartProps) {
     svg
       .append('g')
       .attr('transform', `translate(0,${height})`)
-      .call(d3.axisBottom(x).ticks(8).tickFormat(d3.timeFormat('%b %d')))
+      .call(d3.axisBottom(x).ticks(8).tickFormat(d3.timeFormat('%b %d') as any))
       .style('font-size', '11px')
       .selectAll('text')
       .attr('transform', 'rotate(-45)')

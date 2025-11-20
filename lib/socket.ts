@@ -11,7 +11,7 @@ export const initializeSocketIO = (server: HTTPServer) => {
       origin: process.env.NEXTAUTH_URL || 'http://localhost:3000',
       methods: ['GET', 'POST'],
     },
-  })
+  } as any)
 
   io.on('connection', (socket) => {
     console.log('Client connected:', socket.id)

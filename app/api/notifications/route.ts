@@ -85,12 +85,14 @@ export async function POST(request: Request) {
     // Send email if enabled
     if (user.preferences?.emailNotifications && user.email) {
       try {
-        await sendEmailNotification(
-          user.email,
+        await sendEmailNotification({
+          to: user.email,
+          subject: title,
           title,
           message,
-          data
-        )
+          type: type,
+          metrics: data,
+        })
       } catch (emailError) {
         console.error('Email send failed:', emailError)
         // Don't fail the whole request if email fails
@@ -102,7 +104,7 @@ export async function POST(request: Request) {
       try {
         await sendWebhookNotification(
           user.preferences.webhookUrl,
-          { type, title, message, data }
+          { type, title, message, data, timestamp: new Date().toISOString() }
         )
       } catch (webhookError) {
         console.error('Webhook send failed:', webhookError)
