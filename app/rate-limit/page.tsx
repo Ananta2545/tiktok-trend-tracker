@@ -93,8 +93,12 @@ export default function RateLimitPage() {
     ],
   }
 
-  const rateLimitPercentage = rateLimitData?.rateLimit?.percentage || 0
+  const hourlyLimit = rateLimitData?.rateLimit?.hourly
+  const dailyLimit = rateLimitData?.rateLimit?.daily
+  const rateLimitPercentage = hourlyLimit?.percentage || 0
+  const dailyLimitPercentage = dailyLimit?.percentage || 0
   const rateLimitStatus = rateLimitPercentage > 80 ? 'danger' : rateLimitPercentage > 60 ? 'warning' : 'success'
+  const dailyLimitStatus = dailyLimitPercentage > 80 ? 'danger' : dailyLimitPercentage > 60 ? 'warning' : 'success'
 
   return (
     <div className="min-h-screen bg-background">
@@ -156,10 +160,13 @@ export default function RateLimitPage() {
             <Activity size={24} />
             Current Rate Limit Status
           </h2>
-          <div className="mb-4">
+          
+          {/* Hourly Limit */}
+          <div className="mb-6">
+            <h3 className="text-sm font-medium text-muted-foreground mb-2">Hourly Limit</h3>
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm font-medium">
-                {rateLimitData?.rateLimit?.current || 0} / {rateLimitData?.rateLimit?.max || 1000} calls this hour
+                {hourlyLimit?.current || 0} / {hourlyLimit?.max || 0} calls this hour
               </span>
               <span className={`text-sm font-semibold ${
                 rateLimitStatus === 'danger' ? 'text-red-500' :
@@ -180,11 +187,39 @@ export default function RateLimitPage() {
               ></div>
             </div>
           </div>
-          {rateLimitStatus === 'danger' && (
+
+          {/* Daily Limit */}
+          <div className="mb-4">
+            <h3 className="text-sm font-medium text-muted-foreground mb-2">Daily Limit</h3>
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm font-medium">
+                {dailyLimit?.current || 0} / {dailyLimit?.max || 0} calls today
+              </span>
+              <span className={`text-sm font-semibold ${
+                dailyLimitStatus === 'danger' ? 'text-red-500' :
+                dailyLimitStatus === 'warning' ? 'text-yellow-500' :
+                'text-green-500'
+              }`}>
+                {dailyLimitPercentage.toFixed(1)}%
+              </span>
+            </div>
+            <div className="w-full bg-secondary rounded-full h-4">
+              <div
+                className={`h-4 rounded-full transition-all ${
+                  dailyLimitStatus === 'danger' ? 'bg-red-500' :
+                  dailyLimitStatus === 'warning' ? 'bg-yellow-500' :
+                  'bg-green-500'
+                }`}
+                style={{ width: `${Math.min(dailyLimitPercentage, 100)}%` }}
+              ></div>
+            </div>
+          </div>
+
+          {(rateLimitStatus === 'danger' || dailyLimitStatus === 'danger') && (
             <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mt-4">
               <p className="text-red-500 text-sm flex items-center gap-2">
                 <AlertCircle size={16} />
-                Warning: You're approaching the rate limit. Consider reducing API calls.
+                Warning: You're approaching your rate limit. Consider reducing API calls or upgrading your plan.
               </p>
             </div>
           )}

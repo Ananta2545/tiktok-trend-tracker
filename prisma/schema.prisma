@@ -69,6 +69,8 @@ model UserPreference {
   digestTime            String   @default("09:00")
   minEngagementRate     Float    @default(5.0)
   minViewCount          Int      @default(100000)
+  apiRateLimitPerHour   Int      @default(1000)
+  apiRateLimitPerDay    Int      @default(10000)
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
   

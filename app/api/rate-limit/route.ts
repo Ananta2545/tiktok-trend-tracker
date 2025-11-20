@@ -88,10 +88,18 @@ export async function GET() {
       }
     }).reverse()
 
+    // Get user's rate limit from preferences
+    const userPrefs = await prisma.userPreference.findUnique({
+      where: { userId: user.id },
+    })
+
+    const rateLimitPerHour = userPrefs?.apiRateLimitPerHour || 1000
+    const rateLimitPerDay = userPrefs?.apiRateLimitPerDay || 10000
+
     // Calculate rate limit status
-    const rateLimitPerHour = 1000 // Max calls per hour
     const currentHourCalls = hourlyData[hourlyData.length - 1]?.count || 0
     const rateLimitPercentage = (currentHourCalls / rateLimitPerHour) * 100
+    const dailyLimitPercentage = (callsLast24Hours / rateLimitPerDay) * 100
 
     // Get response time stats for THIS USER ONLY
     const recentCalls = await prisma.apiUsage.findMany({
@@ -123,9 +131,16 @@ export async function GET() {
       })),
       hourlyData,
       rateLimit: {
-        current: currentHourCalls,
-        max: rateLimitPerHour,
-        percentage: rateLimitPercentage,
+        hourly: {
+          current: currentHourCalls,
+          max: rateLimitPerHour,
+          percentage: rateLimitPercentage,
+        },
+        daily: {
+          current: callsLast24Hours,
+          max: rateLimitPerDay,
+          percentage: dailyLimitPercentage,
+        },
       },
       avgResponseTime: Math.round(avgResponseTime),
       successRate: Math.round(successRate * 100) / 100,
