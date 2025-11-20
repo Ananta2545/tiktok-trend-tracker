@@ -1,0 +1,60 @@
+name: TikTok Trend Tracker Cron Jobs
+
+on:
+  schedule:
+    # Send digests - every minute
+    - cron: '* * * * *'
+    # Check trends - every hour at minute 0
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allows manual triggering from GitHub UI
+
+jobs:
+  send-digests:
+    name: Send Daily Digests
+    runs-on: ubuntu-latest
+    # Run every minute OR on manual trigger
+    if: github.event.schedule == '* * * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Trigger Send Digests API
+        run: |
+          response=$(curl -X POST https://tiktoktrendtracker.vercel.app/api/cron/send-digests \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -w "\n%{http_code}" \
+            -s)
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+          
+          if [ "$http_code" -ne 200 ]; then
+            echo "Error: API returned status $http_code"
+            exit 1
+          fi
+
+  check-trends:
+    name: Check TikTok Trends
+    runs-on: ubuntu-latest
+    # Run every hour OR on manual trigger
+    if: github.event.schedule == '0 * * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Trigger Check Trends API
+        run: |
+          response=$(curl -X POST https://tiktoktrendtracker.vercel.app/api/cron/check-trends \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -w "\n%{http_code}" \
+            -s)
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+          
+          if [ "$http_code" -ne 200 ]; then
+            echo "Error: API returned status $http_code"
+            exit 1
+          fi
