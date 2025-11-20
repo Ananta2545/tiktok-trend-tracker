@@ -32,13 +32,6 @@
 
 ---
 
-## 🎥 Demo Video
-
-<!-- [![Demo Video](docs/images/video-thumbnail.png)](https://youtu.be/your-video-id) -->
-> *Click to watch the full demo video*
-
----
-
 ## ✨ Features
 
 ### 🔐 Authentication & User Management
