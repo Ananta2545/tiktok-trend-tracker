@@ -8,8 +8,17 @@ export const dynamic = 'force-dynamic'
 export async function GET() {
   try {
     const session = await getServerSession(authOptions)
-    if (!session) {
+    if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Get current user
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    })
+
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 })
     }
 
     const now = new Date()
@@ -45,15 +54,17 @@ export async function GET() {
       ? ((creatorCount - creatorCountYesterday) / creatorCountYesterday) * 100
       : 0
 
-    // Get API calls today
+    // Get API calls today for THIS USER ONLY
     const apiCalls = await prisma.apiUsage.count({
       where: {
+        userId: user.id,
         timestamp: { gte: yesterday },
       },
     })
 
     const apiCallsYesterday = await prisma.apiUsage.count({
       where: {
+        userId: user.id,
         timestamp: { gte: lastWeek, lt: yesterday },
       },
     })

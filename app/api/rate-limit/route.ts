@@ -12,39 +12,65 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    // Get current user
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    })
+
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+    }
+
     const now = new Date()
     const last24Hours = new Date(now.getTime() - 24 * 60 * 60 * 1000)
     const last7Days = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
     const last30Days = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000)
 
-    // Get API usage stats
-    const totalCalls = await prisma.apiUsage.count()
+    // Get API usage stats for THIS USER ONLY
+    const totalCalls = await prisma.apiUsage.count({
+      where: { userId: user.id },
+    })
     
     const callsLast24Hours = await prisma.apiUsage.count({
-      where: { timestamp: { gte: last24Hours } },
+      where: { 
+        userId: user.id,
+        timestamp: { gte: last24Hours },
+      },
     })
 
     const callsLast7Days = await prisma.apiUsage.count({
-      where: { timestamp: { gte: last7Days } },
+      where: { 
+        userId: user.id,
+        timestamp: { gte: last7Days },
+      },
     })
 
     const callsLast30Days = await prisma.apiUsage.count({
-      where: { timestamp: { gte: last30Days } },
+      where: { 
+        userId: user.id,
+        timestamp: { gte: last30Days },
+      },
     })
 
-    // Get calls by endpoint
+    // Get calls by endpoint for THIS USER ONLY
     const callsByEndpoint = await prisma.apiUsage.groupBy({
       by: ['endpoint'],
-      where: { timestamp: { gte: last7Days } },
+      where: { 
+        userId: user.id,
+        timestamp: { gte: last7Days },
+      },
       _count: { endpoint: true },
       orderBy: { _count: { endpoint: 'desc' } },
       take: 10,
     })
 
-    // Get hourly breakdown for last 24 hours
+    // Get hourly breakdown for last 24 hours for THIS USER ONLY
     const hourlyBreakdown = await prisma.apiUsage.groupBy({
       by: ['timestamp'],
-      where: { timestamp: { gte: last24Hours } },
+      where: { 
+        userId: user.id,
+        timestamp: { gte: last24Hours },
+      },
       _count: true,
     })
 
@@ -67,9 +93,12 @@ export async function GET() {
     const currentHourCalls = hourlyData[hourlyData.length - 1]?.count || 0
     const rateLimitPercentage = (currentHourCalls / rateLimitPerHour) * 100
 
-    // Get response time stats
+    // Get response time stats for THIS USER ONLY
     const recentCalls = await prisma.apiUsage.findMany({
-      where: { timestamp: { gte: last24Hours } },
+      where: { 
+        userId: user.id,
+        timestamp: { gte: last24Hours },
+      },
       select: { responseTime: true, statusCode: true },
       orderBy: { timestamp: 'desc' },
       take: 100,
