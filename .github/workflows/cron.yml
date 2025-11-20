@@ -2,8 +2,8 @@ name: TikTok Trend Tracker Cron Jobs
 
 on:
   schedule:
-    # Send digests - every minute
-    - cron: '* * * * *'
+    # Send digests - every 5 minutes (GitHub minimum)
+    - cron: '*/5 * * * *'
     # Check trends - every hour at minute 0
     - cron: '0 * * * *'
   workflow_dispatch: # Allows manual triggering from GitHub UI
@@ -12,8 +12,8 @@ jobs:
   send-digests:
     name: Send Daily Digests
     runs-on: ubuntu-latest
-    # Run every minute OR on manual trigger
-    if: github.event.schedule == '* * * * *' || github.event_name == 'workflow_dispatch'
+    # Run every 5 minutes OR on manual trigger
+    if: github.event.schedule == '*/5 * * * *' || github.event_name == 'workflow_dispatch'
     steps:
       - name: Trigger Send Digests API
         run: |
