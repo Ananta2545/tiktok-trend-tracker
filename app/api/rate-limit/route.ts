@@ -91,10 +91,14 @@ export async function GET() {
     // Get user's rate limit from preferences
     const userPrefs = await prisma.userPreference.findUnique({
       where: { userId: user.id },
+      select: {
+        apiRateLimitPerHour: true,
+        apiRateLimitPerDay: true,
+      },
     })
 
-    const rateLimitPerHour = userPrefs?.apiRateLimitPerHour || 1000
-    const rateLimitPerDay = userPrefs?.apiRateLimitPerDay || 10000
+    const rateLimitPerHour = userPrefs?.apiRateLimitPerHour ?? 1000
+    const rateLimitPerDay = userPrefs?.apiRateLimitPerDay ?? 10000
 
     // Calculate rate limit status
     const currentHourCalls = hourlyData[hourlyData.length - 1]?.count || 0
