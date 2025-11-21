@@ -148,19 +148,19 @@ export async function POST(request: Request) {
             : 0
         }
 
-        const engagementRate = data.videos.size > 0 
-          ? (data.views / data.videos.size) / 10000 
-          : 0
-
-        const trendScore = (growthRate * 0.4) + (engagementRate * 0.3) + (data.videos.size * 0.3)
+        const velocity = previousTrend ? growthRate : 0
+        const trendScore = (growthRate * 0.5) + (data.videos.size * 0.3) + (velocity * 0.2)
 
         await prisma.hashtagTrend.create({
           data: {
             hashtagId: hashtag.id,
             videoCount: data.videos.size,
             viewCount: BigInt(data.views),
+            likeCount: BigInt(0),
+            shareCount: BigInt(0),
+            commentCount: BigInt(0),
             growthRate,
-            engagementRate,
+            velocity,
             trendScore,
           },
         })
@@ -176,20 +176,19 @@ export async function POST(request: Request) {
     for (const [id, data] of soundMap) {
       try {
         const sound = await prisma.sound.upsert({
-          where: { soundId: id },
+          where: { tiktokId: id },
           update: {
             title: data.title,
             author: data.author,
             videoCount: data.videos.size,
-            playCount: BigInt(data.plays),
             lastUpdatedAt: new Date(),
           },
           create: {
-            soundId: id,
+            tiktokId: id,
             title: data.title,
             author: data.author,
+            duration: 0,
             videoCount: data.videos.size,
-            playCount: BigInt(data.plays),
           },
         })
 
@@ -200,25 +199,22 @@ export async function POST(request: Request) {
 
         let growthRate = 0
         if (previousTrend) {
-          const playDiff = Number(data.plays - Number(previousTrend.playCount))
-          growthRate = previousTrend.playCount > 0 
-            ? (playDiff / Number(previousTrend.playCount)) * 100 
+          const playDiff = Number(data.plays - Number(previousTrend.viewCount))
+          growthRate = previousTrend.viewCount > 0 
+            ? (playDiff / Number(previousTrend.viewCount)) * 100 
             : 0
         }
 
-        const engagementRate = data.videos.size > 0 
-          ? (data.plays / data.videos.size) / 10000 
-          : 0
-
-        const trendScore = (growthRate * 0.4) + (engagementRate * 0.3) + (data.videos.size * 0.3)
+        const velocity = previousTrend ? growthRate : 0
+        const trendScore = (growthRate * 0.5) + (data.videos.size * 0.3) + (velocity * 0.2)
 
         await prisma.soundTrend.create({
           data: {
             soundId: sound.id,
             videoCount: data.videos.size,
-            playCount: BigInt(data.plays),
+            viewCount: BigInt(data.plays),
             growthRate,
-            engagementRate,
+            velocity,
             trendScore,
           },
         })
@@ -239,15 +235,14 @@ export async function POST(request: Request) {
             nickname: data.nickname,
             followerCount: data.followers,
             videoCount: data.videos.size,
-            totalViews: BigInt(data.totalViews),
             lastUpdatedAt: new Date(),
           },
           create: {
+            tiktokId: username,
             username,
             nickname: data.nickname,
             followerCount: data.followers,
             videoCount: data.videos.size,
-            totalViews: BigInt(data.totalViews),
           },
         })
 
@@ -265,7 +260,7 @@ export async function POST(request: Request) {
         }
 
         const engagementRate = data.videos.size > 0 
-          ? (data.totalViews / data.videos.size) / 10000 
+          ? (data.totalViews / data.followers) / 100 
           : 0
 
         const trendScore = (growthRate * 0.4) + (engagementRate * 0.3) + (data.followers * 0.0001)
@@ -276,6 +271,7 @@ export async function POST(request: Request) {
             followerCount: data.followers,
             videoCount: data.videos.size,
             totalViews: BigInt(data.totalViews),
+            totalLikes: BigInt(0),
             growthRate,
             engagementRate,
             trendScore,
