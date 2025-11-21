@@ -4,14 +4,7 @@
 
 ### Real-time TikTok Analytics & Trend Discovery Platform
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge)](https://tiktoktrendtracker.vercel.app)
-[![Next.js](https://img.shields.io/badge/Next.js-14.0-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
-
 **Monitor viral content patterns, trending sounds, and emerging hashtags with AI-powered predictions**
-
-[Live Demo](https://tiktoktrendtracker.vercel.app) • [Documentation](#-documentation) • [Report Bug](https://github.com/Ananta2545/tiktok-trend-tracker/issues) • [Request Feature](https://github.com/Ananta2545/tiktok-trend-tracker/issues)
 
 </div>
 
@@ -21,41 +14,21 @@
 
 ### Dashboard Overview
 <!-- ![Dashboard Screenshot](docs/images/dashboard.png) -->
-> *Real-time trend analytics dashboard with interactive visualizations*
+<img width="1919" height="969" alt="image" src="https://github.com/user-attachments/assets/a89c350d-9cda-4821-9e45-484f0c3ba8e7" />
+
 
 ### Trend Charts & Analytics
 <!-- ![Trend Charts](docs/images/charts.png) -->
-> *D3.js powered interactive charts showing trend growth and velocity*
+<img width="1901" height="801" alt="image" src="https://github.com/user-attachments/assets/45094f3d-25b3-41ed-b4c3-98149d53a293" />
 
 ### API Rate Limit Dashboard
 <!-- ![API Dashboard](docs/images/api-dashboard.png) -->
-> *Monitor your API usage with real-time metrics*
+<img width="1919" height="972" alt="image" src="https://github.com/user-attachments/assets/e66119d8-2b39-4ac1-8dee-018d46f275c7" />
+
 
 ### Alert Management
 <!-- ![Alerts](docs/images/alerts.png) -->
-> *Custom trend alerts with email and webhook notifications*
-
----
-
-## 🎥 Demo Video
-
-<!-- [![Demo Video](docs/images/video-thumbnail.png)](https://youtu.be/your-video-id) -->
-> *Click to watch the full demo video*
-
----
-
-## 📋 Table of Contents
-
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Configuration](#-configuration)
-- [API Documentation](#-api-documentation)
-- [Deployment](#-deployment)
-- [Scripts](#-available-scripts)
-- [Contributing](#-contributing)
-- [License](#-license)
+<img width="1186" height="877" alt="image" src="https://github.com/user-attachments/assets/9005d45d-5e98-43fe-9e75-2dbcf9a28976" />
 
 ---
 
@@ -637,23 +610,6 @@ We welcome contributions! Please follow these steps:
 - **WebSocket**: Currently using HTTP polling mode in production
 - **Real-time Updates**: 5-minute delay for trend updates via cron
 - **Data Coverage**: Historical data limited to API subscription plan
-
----
-
-## 📝 Documentation
-
-For more detailed documentation, see:
-
-- [SETUP.md](SETUP.md) - Detailed setup instructions
-- [SUBMISSION_REPORT.md](SUBMISSION_REPORT.md) - Project submission details
-- [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) - Feature checklist
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 ## 👨‍💻 Author
@@ -662,36 +618,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - GitHub: [@Ananta2545](https://github.com/Ananta2545)
 - Email: chatterjeeanata091@gmail.com
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-
----
-
-## 🙏 Acknowledgments
-
-- [RapidAPI](https://rapidapi.com/) for TikTok API access
-- [Vercel](https://vercel.com/) for hosting
-- [Neon](https://neon.tech/) for PostgreSQL database
-- [Next.js](https://nextjs.org/) team for the amazing framework
-- [D3.js](https://d3js.org/) for visualization library
-- TikTok for inspiring the project
-
----
-
-## 📊 Project Stats
-
-![GitHub stars](https://img.shields.io/github/stars/Ananta2545/tiktok-trend-tracker?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Ananta2545/tiktok-trend-tracker?style=social)
-![GitHub issues](https://img.shields.io/github/issues/Ananta2545/tiktok-trend-tracker)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/Ananta2545/tiktok-trend-tracker)
 
 ---
 
 <div align="center">
 
 **Made with ❤️ by Anata Chatterjee**
-
-[⭐ Star this repo](https://github.com/Ananta2545/tiktok-trend-tracker) • [🐛 Report Bug](https://github.com/Ananta2545/tiktok-trend-tracker/issues) • [✨ Request Feature](https://github.com/Ananta2545/tiktok-trend-tracker/issues)
-
 </div
 ├── tsconfig.json        # TypeScript config
 └── README.md           # This file
