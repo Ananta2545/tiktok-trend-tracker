@@ -2,13 +2,40 @@ name: TikTok Trend Tracker Cron Jobs
 
 on:
   schedule:
+    # Fetch trends - every 15 minutes
+    - cron: '*/15 * * * *'
     # Send digests - every 5 minutes (GitHub minimum)
     - cron: '*/5 * * * *'
-    # Check trends - every hour at minute 0
+    # Check alerts - every hour at minute 0
     - cron: '0 * * * *'
   workflow_dispatch: # Allows manual triggering from GitHub UI
 
 jobs:
+  fetch-trends:
+    name: Fetch TikTok Trends
+    runs-on: ubuntu-latest
+    # Run every 15 minutes OR on manual trigger
+    if: github.event.schedule == '*/15 * * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Trigger Fetch Trends API
+        run: |
+          response=$(curl -X POST https://tiktoktrendtracker.vercel.app/api/cron/fetch-trends \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -w "\n%{http_code}" \
+            -s)
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+          
+          if [ "$http_code" -ne 200 ]; then
+            echo "Error: API returned status $http_code"
+            exit 1
+          fi
+
   send-digests:
     name: Send Daily Digests
     runs-on: ubuntu-latest
@@ -34,13 +61,13 @@ jobs:
             exit 1
           fi
 
-  check-trends:
-    name: Check TikTok Trends
+  check-alerts:
+    name: Check Trend Alerts
     runs-on: ubuntu-latest
     # Run every hour OR on manual trigger
     if: github.event.schedule == '0 * * * *' || github.event_name == 'workflow_dispatch'
     steps:
-      - name: Trigger Check Trends API
+      - name: Trigger Check Alerts API
         run: |
           response=$(curl -X POST https://tiktoktrendtracker.vercel.app/api/cron/check-trends \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
