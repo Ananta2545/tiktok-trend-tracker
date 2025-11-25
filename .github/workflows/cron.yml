@@ -2,13 +2,8 @@ name: TikTok Trend Tracker Cron Jobs
 
 on:
   schedule:
-    # Fetch trends - every 15 minutes
-    - cron: '*/15 * * * *'
-    # Send digests - every 5 minutes (GitHub minimum)
-    - cron: '*/5 * * * *'
-    # Check alerts - every hour at minute 0
-    - cron: '0 * * * *'
-  workflow_dispatch: # Allows manual triggering from GitHub UI
+    - cron: '0 0 * * *'   # runs once every day at 00:00 (midnight UTC)
+  workflow_dispatch:       # allows manual trigger from GitHub UI
 
 jobs:
   fetch-trends:
